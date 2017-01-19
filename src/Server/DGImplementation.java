@@ -69,7 +69,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 		int winnerId = 0;
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println("Player "+players.get(i).getId()+": "+players.get(i).getNumber());
-			if (players.get(i).getNumber() > 0) {
+			if (players.get(i).getNumber() > winnerValue) {
 				winnerValue = players.get(i).getNumber();
 				winnerId =  players.get(i).getId();
 			}
