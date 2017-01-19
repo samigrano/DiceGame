@@ -28,6 +28,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			}
 			
 			System.out.println("Player: "+checkWinner()+" wins!");
+			System.exit(0);
 			
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
@@ -69,7 +70,11 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 		int winnerId = 0;
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println("Player "+players.get(i).getId()+": "+players.get(i).getNumber());
-			if (players.get(i).getNumber() > winnerValue) {
+			if ((players.get(i).getNumber() == winnerValue)){
+				System.out.println("draw");
+				System.exit(0);
+			}
+			else if(players.get(i).getNumber() > winnerValue) {
 				winnerValue = players.get(i).getNumber();
 				winnerId =  players.get(i).getId();
 			}
