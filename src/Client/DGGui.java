@@ -29,7 +29,7 @@ public class DGGui {
 	private Random rnd = new Random();
 
 	/**
-	 * Ohjelman pää luokka
+	 * Ohjelman pï¿½ï¿½ luokka
 	 */
 	public DGGui() {
 		initialize();
@@ -54,9 +54,9 @@ public class DGGui {
 		playButton = new JButton("PLAY");
 		playButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Tähän play napin toiminnalisuudet
-				//Nyt näyttää erillisellä popup ikkunalla voititko vai hävisitkö
-				//Syöte voitosta ja häviöstä tulee "You Win/Lose" tekstin paikalle
+				//Tï¿½hï¿½n play napin toiminnalisuudet
+				//Nyt nï¿½yttï¿½ï¿½ erillisellï¿½ popup ikkunalla voititko vai hï¿½visitkï¿½
+				//Syï¿½te voitosta ja hï¿½viï¿½stï¿½ tulee "You Win/Lose" tekstin paikalle
 				JOptionPane.showMessageDialog(null, "You Win/Lose");
 			}
 		});
@@ -69,8 +69,11 @@ public class DGGui {
 					ip = playerIP.getText();
 					number = rnd.nextInt(6)+1;
 					DGClientImplementation.init(name, ip, number);
-					//Virheen kaappaus jos nimi kentässä tai ip kentässä virheitä syötteessä
-					//Yhteys napin toiminnalisuudet tähän
+					//Virheen kaappaus jos nimi kentï¿½ssï¿½ tai ip kentï¿½ssï¿½ virheitï¿½ syï¿½tteessï¿½
+					//Yhteys napin toiminnalisuudet tï¿½hï¿½n
+					connectButton.setVisible(false);
+					playerName.setEditable(false);
+					playerIP.setEditable(false);
 				}
 				catch (Exception e){
 					
@@ -86,7 +89,7 @@ public class DGGui {
 		frmDicegame.getContentPane().add(connectButton);
 		
 		////////////////////////////////////////////////////////////////////
-		///         		Tekstin syöttö kentät
+		///         		Tekstin syï¿½ttï¿½ kentï¿½t
 		///////////////////////////////////////////////////////////////////
 		
 		playerName = new JTextField();
@@ -112,7 +115,7 @@ public class DGGui {
 		OtherPlayerNumber.setColumns(10);
 		
 		////////////////////////////////////////////////////////////////////
-		///         Näyttää labelit framessa missä mitäkin
+		///         Nï¿½yttï¿½ï¿½ labelit framessa missï¿½ mitï¿½kin
 		////////////////////////////////////////////////////////////////////
 		
 		JLabel showPlayer1 = new JLabel("YOU");
@@ -137,7 +140,7 @@ public class DGGui {
 	}
 	
 	/**
-	 * Tää main on väliakainen testausta varten
+	 * Tï¿½ï¿½ main on vï¿½liakainen testausta varten
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
