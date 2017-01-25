@@ -12,10 +12,7 @@ public class DGClientImplementation extends UnicastRemoteObject implements Clien
 	}
 	
 
-	public static void main(String[] args) {
 
-		
-	}
 	
 	public static void init() {
 		Player plr = new Player();
