@@ -20,6 +20,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 public class DGGui {
 
@@ -54,7 +55,8 @@ public class DGGui {
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = 0;		
+		c.insets = new Insets(0, 20, 5, 0);
 		mainFrame.add(ipLabel, c);
 		
 		playerIPInput = new JTextField();
