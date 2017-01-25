@@ -57,7 +57,6 @@ public class DGGui {
 		c.gridy = 0;
 		mainFrame.add(ipLabel, c);
 		
-		
 		playerIPInput = new JTextField();
 		playerIPInput.setText("127.0.0.1");
 		mainFrame.add(playerIPInput);
@@ -95,12 +94,8 @@ public class DGGui {
 		otherPlayerNumber = new JTextField();
 		otherPlayerNumber.setEditable(false);
 		
-		
-		JLabel showPlayer1 = new JLabel("YOU");
-		showPlayer1.setFont(new Font("Ravie", Font.BOLD, 15));
-		
+		JLabel showPlayer1 = new JLabel("YOU");		
 		JLabel showPlayer2 = new JLabel("ENEMY");
-		showPlayer2.setFont(new Font("Ravie", Font.BOLD, 15));
 		
 		diceRollInfo.add(yourNumber);
 		diceRollInfo.add(otherPlayerNumber);
@@ -111,15 +106,10 @@ public class DGGui {
 		c.gridx = 0;
 		c.gridy = 2;
 		mainFrame.add(diceRollInfo, c);
-		
-		
-		playButton = new JButton("PLAY");
-		playButton.addActionListener(new ActionListener() {
 			
+		playButton = new JButton("PLAY");
+		playButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent arg0) {
-				//T�h�n play napin toiminnalisuudet
-				//Nyt n�ytt�� erillisell� popup ikkunalla voititko vai h�visitk�
-				//Sy�te voitosta ja h�vi�st� tulee "You Win/Lose" tekstin paikalle
 				JOptionPane.showMessageDialog(null, "You Win/Lose");
 			}
 		});
@@ -131,22 +121,20 @@ public class DGGui {
 					ip = playerIPInput.getText();
 					number = rnd.nextInt(6)+1;
 					DGClientImplementation.init(name, ip, number);
-					//Virheen kaappaus jos nimi kent�ss� tai ip kent�ss� virheit� sy�tteess�
-					//Yhteys napin toiminnalisuudet t�h�n
+	
 					connectButton.setVisible(false);
 					playerNameInput.setEditable(false);
 					playerIPInput.setEditable(false);
 					diceRollInfo.setVisible(true);
 				}
-				catch (Exception e){
-					
+				catch (Exception e){	
 				}
 			}
 		});		
 	}
 	
 	/**
-	 * T�� main on v�liakainen testausta varten
+	 * To be removed, temporarily for testing
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
