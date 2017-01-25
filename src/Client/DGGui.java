@@ -3,6 +3,7 @@ package Client;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -12,17 +13,24 @@ import java.rmi.RemoteException;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 public class DGGui {
 
 	private JFrame frmDicegame;
+	private JPanel diceRollInfo;
 	private JButton playButton;
 	private JButton connectButton;
 	private JTextField playerName;
 	private JTextField playerIP;
 	private JTextField yourNumber;
-	private JTextField OtherPlayerNumber;
+	private JTextField otherPlayerNumber;
 	private String name;
 	private String ip;
 	private int number;
@@ -44,12 +52,77 @@ public class DGGui {
 		frmDicegame.setTitle("DiceGame");
 		frmDicegame.setBounds(100, 100, 349, 215);
 		frmDicegame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmDicegame.getContentPane().setLayout(null);
+		
+		frmDicegame.getContentPane().setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		JLabel ipLabel = new JLabel("IP:");
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		frmDicegame.add(ipLabel, c);
 		
 		
-		////////////////////////////////////////////////////////////////////
-		///         		Ohjelman napit
-		///////////////////////////////////////////////////////////////////		
+		playerIP = new JTextField();
+		playerIP.setHorizontalAlignment(SwingConstants.CENTER);
+		playerIP.setText("127.0.0.1");
+		frmDicegame.getContentPane().add(playerIP);//Pelaajan ip (vakio localhost)
+		playerIP.setColumns(10);
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 0;
+		frmDicegame.add(playerIP, c);
+
+		JLabel nameLabel = new JLabel("Name:");
+	
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		frmDicegame.add(nameLabel, c);
+
+		playerName = new JTextField();
+		playerName.setBounds(42, 33, 86, 20);
+		playerName.setColumns(10);
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 1;
+		frmDicegame.add(playerName, c);
+		
+		connectButton = new JButton("Connect");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 2;
+		frmDicegame.add(connectButton, c);
+		
+		diceRollInfo = new JPanel();
+		diceRollInfo.setLayout(new GridLayout(2,2));
+		
+		yourNumber = new JTextField();
+		yourNumber.setEditable(false);
+		
+		otherPlayerNumber = new JTextField();
+		otherPlayerNumber.setEditable(false);
+		
+		
+		JLabel showPlayer1 = new JLabel("YOU");
+		showPlayer1.setFont(new Font("Ravie", Font.BOLD, 15));
+		
+		JLabel showPlayer2 = new JLabel("ENEMY");
+		showPlayer2.setFont(new Font("Ravie", Font.BOLD, 15));
+		
+		diceRollInfo.add(yourNumber);
+		diceRollInfo.add(otherPlayerNumber);
+		diceRollInfo.add(showPlayer1);
+		diceRollInfo.add(showPlayer2);
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 3;
+		frmDicegame.add(diceRollInfo, c);
 		
 		playButton = new JButton("PLAY");
 		playButton.addActionListener(new ActionListener() {
@@ -61,7 +134,6 @@ public class DGGui {
 			}
 		});
 		
-		connectButton = new JButton("Connect");
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -78,65 +150,8 @@ public class DGGui {
 				catch (Exception e){
 					
 				}
-				
 			}
-		});
-		
-		playButton.setBounds(120, 117, 89, 23);
-		frmDicegame.getContentPane().add(playButton);
-		
-		connectButton.setBounds(234, 32, 89, 23);
-		frmDicegame.getContentPane().add(connectButton);
-		
-		////////////////////////////////////////////////////////////////////
-		///         		Tekstin sy�tt� kent�t
-		///////////////////////////////////////////////////////////////////
-		
-		playerName = new JTextField();
-		playerName.setBounds(42, 33, 86, 20);
-		frmDicegame.getContentPane().add(playerName);//Pelaajan nimi 
-		playerName.setColumns(10);
-		
-		playerIP = new JTextField();
-		playerIP.setHorizontalAlignment(SwingConstants.CENTER);
-		playerIP.setText("127.0.0.1");
-		playerIP.setBounds(138, 33, 86, 20);
-		frmDicegame.getContentPane().add(playerIP);//Pelaajan ip (vakio localhost)
-		playerIP.setColumns(10);
-		
-		yourNumber = new JTextField();
-		yourNumber.setBounds(42, 118, 45, 20);
-		frmDicegame.getContentPane().add(yourNumber);
-		yourNumber.setColumns(10);
-		
-		OtherPlayerNumber = new JTextField();
-		OtherPlayerNumber.setBounds(238, 118, 45, 20);
-		frmDicegame.getContentPane().add(OtherPlayerNumber);
-		OtherPlayerNumber.setColumns(10);
-		
-		////////////////////////////////////////////////////////////////////
-		///         N�ytt�� labelit framessa miss� mit�kin
-		////////////////////////////////////////////////////////////////////
-		
-		JLabel showPlayer1 = new JLabel("YOU");
-		showPlayer1.setFont(new Font("Ravie", Font.BOLD, 15));
-		showPlayer1.setHorizontalAlignment(SwingConstants.CENTER);
-		showPlayer1.setBounds(33, 92, 54, 14);
-		frmDicegame.getContentPane().add(showPlayer1);
-		
-		JLabel showPlayer2 = new JLabel("ENEMY");
-		showPlayer2.setFont(new Font("Ravie", Font.BOLD, 15));
-		showPlayer2.setBounds(220, 88, 88, 23);
-		frmDicegame.getContentPane().add(showPlayer2);
-		
-		JLabel nameLabel = new JLabel("Name:");
-		nameLabel.setBounds(42, 11, 46, 14);
-		frmDicegame.getContentPane().add(nameLabel);
-		
-		JLabel ipLabel = new JLabel("IP:");
-		ipLabel.setBounds(138, 8, 46, 14);
-		frmDicegame.getContentPane().add(ipLabel);
-		
+		});		
 	}
 	
 	/**
