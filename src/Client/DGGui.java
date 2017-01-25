@@ -106,13 +106,16 @@ public class DGGui {
 		diceRollInfo.add(otherPlayerNumber);
 		diceRollInfo.add(showPlayer1);
 		diceRollInfo.add(showPlayer2);
+		diceRollInfo.setVisible(false);
 
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 2;
 		mainFrame.add(diceRollInfo, c);
+		
 		
 		playButton = new JButton("PLAY");
 		playButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
 				//T�h�n play napin toiminnalisuudet
 				//Nyt n�ytt�� erillisell� popup ikkunalla voititko vai h�visitk�
@@ -133,6 +136,7 @@ public class DGGui {
 					connectButton.setVisible(false);
 					playerNameInput.setEditable(false);
 					playerIPInput.setEditable(false);
+					diceRollInfo.setVisible(true);
 				}
 				catch (Exception e){
 					
