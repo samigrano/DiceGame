@@ -27,8 +27,8 @@ public class DGGui {
 	private JPanel diceRollInfo;
 	private JButton playButton;
 	private JButton connectButton;
-	private JTextField playerName;
-	private JTextField playerIP;
+	private JTextField playerNameInput;
+	private JTextField playerIPInput;
 	private JTextField yourNumber;
 	private JTextField otherPlayerNumber;
 	private String name;
@@ -36,9 +36,6 @@ public class DGGui {
 	private int number;
 	private Random rnd = new Random();
 
-	/**
-	 * Ohjelman p�� luokka
-	 */
 	public DGGui() {
 		initialize();
 	}
@@ -53,7 +50,7 @@ public class DGGui {
 		frmDicegame.setBounds(100, 100, 349, 215);
 		frmDicegame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frmDicegame.getContentPane().setLayout(new GridBagLayout());
+		frmDicegame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		JLabel ipLabel = new JLabel("IP:");
@@ -64,35 +61,31 @@ public class DGGui {
 		frmDicegame.add(ipLabel, c);
 		
 		
-		playerIP = new JTextField();
-		playerIP.setHorizontalAlignment(SwingConstants.CENTER);
-		playerIP.setText("127.0.0.1");
-		frmDicegame.getContentPane().add(playerIP);//Pelaajan ip (vakio localhost)
-		playerIP.setColumns(10);
+		playerIPInput = new JTextField();
+		playerIPInput.setHorizontalAlignment(SwingConstants.CENTER);
+		playerIPInput.setText("127.0.0.1");
+		frmDicegame.add(playerIPInput);
+		playerIPInput.setColumns(10);
 		
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
-		frmDicegame.add(playerIP, c);
+		frmDicegame.add(playerIPInput, c);
 
 		JLabel nameLabel = new JLabel("Name:");
 	
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 1;
 		frmDicegame.add(nameLabel, c);
 
-		playerName = new JTextField();
-		playerName.setBounds(42, 33, 86, 20);
-		playerName.setColumns(10);
+		playerNameInput = new JTextField();
+		playerNameInput.setBounds(42, 33, 86, 20);
+		playerNameInput.setColumns(10);
 		
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
-		frmDicegame.add(playerName, c);
+		frmDicegame.add(playerNameInput, c);
 		
 		connectButton = new JButton("Connect");
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 2;
@@ -119,7 +112,6 @@ public class DGGui {
 		diceRollInfo.add(showPlayer1);
 		diceRollInfo.add(showPlayer2);
 
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 3;
 		frmDicegame.add(diceRollInfo, c);
@@ -137,15 +129,15 @@ public class DGGui {
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					name = playerName.getText();
-					ip = playerIP.getText();
+					name = playerNameInput.getText();
+					ip = playerIPInput.getText();
 					number = rnd.nextInt(6)+1;
 					DGClientImplementation.init(name, ip, number);
 					//Virheen kaappaus jos nimi kent�ss� tai ip kent�ss� virheit� sy�tteess�
 					//Yhteys napin toiminnalisuudet t�h�n
 					connectButton.setVisible(false);
-					playerName.setEditable(false);
-					playerIP.setEditable(false);
+					playerNameInput.setEditable(false);
+					playerIPInput.setEditable(false);
 				}
 				catch (Exception e){
 					
