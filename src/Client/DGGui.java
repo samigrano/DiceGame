@@ -60,6 +60,7 @@ public class DGGui {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
+					DGClientImplementation.init();
 					//Virheen kaappaus jos nimi kentässä tai ip kentässä virheitä syötteessä
 					//Yhteys napin toiminnalisuudet tähän
 				}
