@@ -23,7 +23,7 @@ import java.awt.GridLayout;
 
 public class DGGui {
 
-	private JFrame frmDicegame;
+	private JFrame mainFrame;
 	private JPanel diceRollInfo;
 	private JButton playButton;
 	private JButton connectButton;
@@ -44,13 +44,13 @@ public class DGGui {
 	 * initialize metodi
 	 */
 	private void initialize() {
-		frmDicegame = new JFrame();
-		frmDicegame.setResizable(false);
-		frmDicegame.setTitle("DiceGame");
-		frmDicegame.setBounds(100, 100, 349, 215);
-		frmDicegame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame = new JFrame();
+		mainFrame.setResizable(false);
+		mainFrame.setTitle("DiceGame");
+		mainFrame.setSize(600, 400);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frmDicegame.setLayout(new GridBagLayout());
+		mainFrame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		JLabel ipLabel = new JLabel("IP:");
@@ -58,24 +58,24 @@ public class DGGui {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
-		frmDicegame.add(ipLabel, c);
+		mainFrame.add(ipLabel, c);
 		
 		
 		playerIPInput = new JTextField();
 		playerIPInput.setHorizontalAlignment(SwingConstants.CENTER);
 		playerIPInput.setText("127.0.0.1");
-		frmDicegame.add(playerIPInput);
+		mainFrame.add(playerIPInput);
 		playerIPInput.setColumns(10);
 		
 		c.gridx = 1;
 		c.gridy = 0;
-		frmDicegame.add(playerIPInput, c);
+		mainFrame.add(playerIPInput, c);
 
 		JLabel nameLabel = new JLabel("Name:");
 	
 		c.gridx = 0;
 		c.gridy = 1;
-		frmDicegame.add(nameLabel, c);
+		mainFrame.add(nameLabel, c);
 
 		playerNameInput = new JTextField();
 		playerNameInput.setBounds(42, 33, 86, 20);
@@ -83,13 +83,13 @@ public class DGGui {
 		
 		c.gridx = 1;
 		c.gridy = 1;
-		frmDicegame.add(playerNameInput, c);
+		mainFrame.add(playerNameInput, c);
 		
 		connectButton = new JButton("Connect");
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 2;
-		frmDicegame.add(connectButton, c);
+		mainFrame.add(connectButton, c);
 		
 		diceRollInfo = new JPanel();
 		diceRollInfo.setLayout(new GridLayout(2,2));
@@ -114,7 +114,7 @@ public class DGGui {
 
 		c.gridx = 0;
 		c.gridy = 3;
-		frmDicegame.add(diceRollInfo, c);
+		mainFrame.add(diceRollInfo, c);
 		
 		playButton = new JButton("PLAY");
 		playButton.addActionListener(new ActionListener() {
@@ -154,7 +154,7 @@ public class DGGui {
 			public void run() {
 				try {
 					DGGui window = new DGGui();
-					window.frmDicegame.setVisible(true);
+					window.mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
