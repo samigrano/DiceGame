@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,10 +19,14 @@ public class DGGui {
 	private JFrame frmDicegame;
 	private JButton playButton;
 	private JButton connectButton;
-	private JTextField palyerName;
-	private JTextField PlayerIP;
+	private JTextField playerName;
+	private JTextField playerIP;
 	private JTextField yourNumber;
 	private JTextField OtherPlayerNumber;
+	private String name;
+	private String ip;
+	private int number;
+	private Random rnd = new Random();
 
 	/**
 	 * Ohjelman pää luokka
@@ -58,9 +64,11 @@ public class DGGui {
 		connectButton = new JButton("Connect");
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				try {
-					DGClientImplementation.init();
+					name = playerName.getText();
+					ip = playerIP.getText();
+					number = rnd.nextInt(6)+1;
+					DGClientImplementation.init(name, ip, number);
 					//Virheen kaappaus jos nimi kentässä tai ip kentässä virheitä syötteessä
 					//Yhteys napin toiminnalisuudet tähän
 				}
@@ -81,15 +89,17 @@ public class DGGui {
 		///         		Tekstin syöttö kentät
 		///////////////////////////////////////////////////////////////////
 		
-		palyerName = new JTextField();
-		palyerName.setBounds(42, 33, 86, 20);
-		frmDicegame.getContentPane().add(palyerName);//Pelaajan nimi 
-		palyerName.setColumns(10);
+		playerName = new JTextField();
+		playerName.setBounds(42, 33, 86, 20);
+		frmDicegame.getContentPane().add(playerName);//Pelaajan nimi 
+		playerName.setColumns(10);
 		
-		PlayerIP = new JTextField();
-		PlayerIP.setBounds(138, 33, 86, 20);
-		frmDicegame.getContentPane().add(PlayerIP);//Pelaajan ip (Vois laittaa vakioks lovahostin)
-		PlayerIP.setColumns(10);
+		playerIP = new JTextField();
+		playerIP.setHorizontalAlignment(SwingConstants.CENTER);
+		playerIP.setText("127.0.0.1");
+		playerIP.setBounds(138, 33, 86, 20);
+		frmDicegame.getContentPane().add(playerIP);//Pelaajan ip (vakio localhost)
+		playerIP.setColumns(10);
 		
 		yourNumber = new JTextField();
 		yourNumber.setBounds(42, 118, 45, 20);

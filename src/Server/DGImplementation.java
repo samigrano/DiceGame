@@ -13,7 +13,6 @@ import Client.Player;
 public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 	Random rnd = new Random();
 	static ArrayList<Player> players = new ArrayList<>();
-	int playerId = 1;
 	protected DGImplementation() throws RemoteException {
 	}
 
@@ -23,7 +22,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			reg.rebind("dice", new DGImplementation());
 			
 			while (!isPlayersConnected()) {
-				Thread.sleep(500);
+				Thread.sleep(2000);
 				System.out.println("Waiting for players...");
 			}
 			
@@ -36,28 +35,9 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 	}
 
 	@Override
-	public String sayHello() throws RemoteException {
-		String s = "Hello";
-		return s;
-
-	}
-
-
-	@Override
-	public int rollNumber() throws RemoteException {
-		int nmbr = rnd.nextInt(6)+1;
-		System.out.println(nmbr);
-		return nmbr;
-
-	}
-
-	@Override
 	public void initPlayer(Player player) throws RemoteException {
 		players.add(player);
-		player.setId(playerId);
-		player.setNumber(rollNumber());
-		System.out.println("hepp "+playerId);
-		playerId++;
+		System.out.println("hepp "+player.getName());
 	}
 	
 	public static boolean isPlayersConnected() {
@@ -65,21 +45,21 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 		else return false;
 	}
 	
-	public static int checkWinner() {
+	public static String checkWinner() {
 		int winnerValue = 0;
-		int winnerId = 0;
+		String winnerName = null;
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println("Player "+players.get(i).getId()+": "+players.get(i).getNumber());
+			System.out.println("Player "+players.get(i).getName() +": "+players.get(i).getNumber());
 			if ((players.get(i).getNumber() == winnerValue)){
 				System.out.println("draw");
 				System.exit(0);
 			}
 			else if(players.get(i).getNumber() > winnerValue) {
 				winnerValue = players.get(i).getNumber();
-				winnerId =  players.get(i).getId();
+				winnerName =  players.get(i).getName();
 			}
 		}
-		return winnerId;
+		return winnerName;
 	}
 
 

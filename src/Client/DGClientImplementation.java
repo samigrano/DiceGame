@@ -14,12 +14,11 @@ public class DGClientImplementation extends UnicastRemoteObject implements Clien
 
 
 	
-	public static void init() {
-		Player plr = new Player();
-		String address = "rmi://127.0.0.1:1099/dice";
+	public static void init(String name, String ip, int number) {
+		Player plr = new Player(name, ip, number);
+		String address = "rmi://" + ip + ":1099/dice";
 		try {
 			DiceGame n = (DiceGame) Naming.lookup(address);
-			//System.out.print(" " + n.sayHello());
 			System.out.println(" ");
 			n.initPlayer(plr);
 		} catch (Exception e) {

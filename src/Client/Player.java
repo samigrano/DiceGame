@@ -9,12 +9,16 @@ public class Player implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int number;
-	private int id;
+	private String name;
+	private String ip;
 
 	
 	
-	public Player() {
-		super();
+	public Player(String name, String ip, int number) {
+		this.name = name;
+		this.ip = ip;
+		this.number = number;
+		
 	}
 
 	public int getNumber() {
@@ -25,12 +29,20 @@ public class Player implements Serializable {
 		this.number = number;
 	}
 
-	public int getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 	
