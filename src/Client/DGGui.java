@@ -40,9 +40,6 @@ public class DGGui {
 		initialize();
 	}
 
-	/**
-	 * initialize metodi
-	 */
 	private void initialize() {
 		mainFrame = new JFrame();
 		mainFrame.setResizable(false);
@@ -62,7 +59,6 @@ public class DGGui {
 		
 		
 		playerIPInput = new JTextField();
-		playerIPInput.setHorizontalAlignment(SwingConstants.CENTER);
 		playerIPInput.setText("127.0.0.1");
 		mainFrame.add(playerIPInput);
 		playerIPInput.setColumns(10);
@@ -78,7 +74,6 @@ public class DGGui {
 		mainFrame.add(nameLabel, c);
 
 		playerNameInput = new JTextField();
-		playerNameInput.setBounds(42, 33, 86, 20);
 		playerNameInput.setColumns(10);
 		
 		c.gridx = 1;
