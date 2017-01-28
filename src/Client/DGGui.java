@@ -21,7 +21,7 @@ public class DGGui {
 	private JTextField playerNameInput;
 	private JTextField playerIPInput;
 	private JTextField yourNumber;
-	private JTextField otherPlayerNumber;
+	private static JTextField otherPlayerNumber;
 	private String name;
 	private String ip;
 	private int number;
@@ -113,6 +113,10 @@ public class DGGui {
 				}
 			}
 		});		
+	}
+	
+	public static void appendEnemyNumber(int number) {
+		otherPlayerNumber.setText(""+number);
 	}
 	
 	/**

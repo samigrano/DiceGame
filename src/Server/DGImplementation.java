@@ -6,6 +6,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Random;
+
+import Client.DGClientImplementation;
 import Client.Player;
 
 public class DGImplementation extends UnicastRemoteObject implements DiceGame {
@@ -29,7 +31,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			}
 			
 			System.out.println("Player: "+checkWinner()+" wins!");
-			System.exit(0);
+			//System.exit(0);
 			
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
@@ -42,7 +44,6 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 		players.add(player);
 		System.out.println("hepp "+player.getName());
 	}
-	
 	public static boolean isPlayersConnected() {
 		if (players.size() > 1) return true;
 		else return false;
@@ -55,7 +56,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			System.out.println("Player "+players.get(i).getName() +": "+players.get(i).getNumber());
 			if ((players.get(i).getNumber() == winnerValue)){
 				System.out.println("draw");
-				System.exit(0);
+				//System.exit(0);
 			}
 			else if(players.get(i).getNumber() > winnerValue) {
 				winnerValue = players.get(i).getNumber();
@@ -68,12 +69,33 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 	@Override
 	public void sendMessage(String s) throws RemoteException {
 		System.out.println(s);	
+		
 	}
 
 	@Override
 	public String getMessage() throws RemoteException {
 		return checkWinner();
 	}
+
+	@Override
+	public boolean isGameOn() throws RemoteException {
+		if (isPlayersConnected()) return true;
+		else return false;
+	}
+
+	@Override
+	public int giveEnemyNumber(String name) throws RemoteException {
+		int enemyNumber = 0;
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).getName().equals(name)) {
+				enemyNumber = players.get(i).getNumber();
+			}
+		}
+		return enemyNumber;
+		
+	}
+	
+	
 
 
 }
