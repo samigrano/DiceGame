@@ -13,6 +13,8 @@ public class DGClientImplementation extends UnicastRemoteObject{
 	
 	public static void init(String name, String ip, int number) {
 		String queryName = name;
+		int ownNumber = number;
+		
 		Player plr = new Player(name, ip, number);
 		String address = "rmi://" + ip + ":1099/dice";
 		try {
@@ -25,6 +27,7 @@ public class DGClientImplementation extends UnicastRemoteObject{
 				Thread.sleep(200);
 			}
 			int enemyNumber = n.giveEnemyNumber(queryName);
+			setYourNumber(ownNumber);
 			setEnemyNumber(enemyNumber);
 			
 		} catch (Exception e) {
@@ -36,8 +39,8 @@ public class DGClientImplementation extends UnicastRemoteObject{
 		DGGui.appendEnemyNumber(number);
 	}
 	
-	public static void giveEnemyNumber() {
-		
+	public static void setYourNumber(int number) {
+		DGGui.appenOwnNumber(number);
 	}
 
 }

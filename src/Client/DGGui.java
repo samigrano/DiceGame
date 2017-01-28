@@ -20,7 +20,7 @@ public class DGGui {
 	private JButton connectButton;
 	private JTextField playerNameInput;
 	private JTextField playerIPInput;
-	private JTextField yourNumber;
+	private static JTextField yourNumber;
 	private static JTextField otherPlayerNumber;
 	private String name;
 	private String ip;
@@ -117,6 +117,10 @@ public class DGGui {
 	
 	public static void appendEnemyNumber(int number) {
 		otherPlayerNumber.setText(""+number);
+	}
+	
+	public static void appenOwnNumber(int number) {
+		yourNumber.setText(""+number);
 	}
 	
 	/**

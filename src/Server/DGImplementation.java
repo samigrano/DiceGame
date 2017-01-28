@@ -87,7 +87,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 	public int giveEnemyNumber(String name) throws RemoteException {
 		int enemyNumber = 0;
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).getName().equals(name)) {
+			if (!players.get(i).getName().equals(name)) {
 				enemyNumber = players.get(i).getNumber();
 			}
 		}
