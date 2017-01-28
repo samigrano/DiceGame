@@ -1,5 +1,6 @@
 package Client;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.UIManager;
 
 public class DGGui {
 
