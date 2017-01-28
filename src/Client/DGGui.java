@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class DGGui {
 
@@ -32,6 +34,7 @@ public class DGGui {
 
 	private void initialize() throws IOException {
 		mainFrame = new JFrame();
+		mainFrame.getContentPane().setBackground(new Color(102, 204, 204));
 		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Client\\kuva.png"));
 		mainFrame.setResizable(false);
 		mainFrame.setTitle("DiceGame");
