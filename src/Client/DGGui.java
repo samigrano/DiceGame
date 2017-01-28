@@ -1,32 +1,21 @@
 package Client;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.util.Random;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Random;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class DGGui {
 
 	private JFrame mainFrame;
-	private JPanel diceRollInfo;
-	private JButton playButton;
 	private JButton connectButton;
 	private JTextField playerNameInput;
 	private JTextField playerIPInput;
@@ -37,84 +26,74 @@ public class DGGui {
 	private int number;
 	private Random rnd = new Random();
 
-	public DGGui() {
+	public DGGui() throws IOException {
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize() throws IOException {
 		mainFrame = new JFrame();
+		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Client\\kuva.png"));
 		mainFrame.setResizable(false);
 		mainFrame.setTitle("DiceGame");
-		mainFrame.setSize(600, 400);
+		mainFrame.setSize(317, 231);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		mainFrame.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		mainFrame.getContentPane().setLayout(null);
 
-		JLabel ipLabel = new JLabel("IP:");
 		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 0;		
-		c.insets = new Insets(0, 20, 5, 0);
-		mainFrame.add(ipLabel, c);
-		
-		playerIPInput = new JTextField();
-		playerIPInput.setText("127.0.0.1");
-		mainFrame.add(playerIPInput);
-		playerIPInput.setColumns(10);
-		
-		c.gridx = 1;
-		c.gridy = 0;
-		mainFrame.add(playerIPInput, c);
-
-		JLabel nameLabel = new JLabel("Name:");
-	
-		c.gridx = 0;
-		c.gridy = 1;
-		mainFrame.add(nameLabel, c);
-
-		playerNameInput = new JTextField();
-		playerNameInput.setColumns(10);
-		
-		c.gridx = 1;
-		c.gridy = 1;
-		mainFrame.add(playerNameInput, c);
+		//Buttons
 		
 		connectButton = new JButton("Connect");
-		c.gridx = 0;
-		c.gridy = 2;
-		c.gridwidth = 2;
-		mainFrame.add(connectButton, c);
+		connectButton.setBounds(36, 152, 203, 23);
+		mainFrame.getContentPane().add(connectButton);
 		
-		diceRollInfo = new JPanel();
-		diceRollInfo.setLayout(new GridLayout(2,2));
+		//Labels
 		
+		JLabel ipLabel = new JLabel("IP:");
+		ipLabel.setBounds(65, 59, 23, 14);
+		mainFrame.getContentPane().add(ipLabel);
+
+		JLabel nameLabel = new JLabel("Name:");
+		nameLabel.setBounds(48, 34, 40, 14);
+		mainFrame.getContentPane().add(nameLabel);
+
+		JLabel showPlayer1 = new JLabel("YOU");		
+		showPlayer1.setBounds(36, 153, 40, 20);
+		mainFrame.getContentPane().add(showPlayer1);
+		
+		JLabel showPlayer2 = new JLabel("ENEMY");
+		showPlayer2.setBounds(132, 153, 50, 20);
+		mainFrame.getContentPane().add(showPlayer2);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("src\\Client\\dice.png"));
+		lblNewLabel.setBounds(169, 11, 133, 141);
+		mainFrame.getContentPane().add(lblNewLabel);
+		
+		//Text Fields
+		
+		playerIPInput = new JTextField();
+		playerIPInput.setBounds(88, 56, 71, 20);
+		playerIPInput.setText("127.0.0.1");
+		mainFrame.getContentPane().add(playerIPInput);
+		playerIPInput.setColumns(10);
+		mainFrame.getContentPane().add(playerIPInput);
+		
+		playerNameInput = new JTextField();
+		playerNameInput.setBounds(88, 31, 71, 20);
+		playerNameInput.setColumns(10);
+		mainFrame.getContentPane().add(playerNameInput);
+
 		yourNumber = new JTextField();
+		yourNumber.setBounds(79, 153, 40, 20);
+		mainFrame.getContentPane().add(yourNumber);
 		yourNumber.setEditable(false);
 		
 		otherPlayerNumber = new JTextField();
+		otherPlayerNumber.setBounds(179, 153, 40, 20);
+		mainFrame.getContentPane().add(otherPlayerNumber);
 		otherPlayerNumber.setEditable(false);
-		
-		JLabel showPlayer1 = new JLabel("YOU");		
-		JLabel showPlayer2 = new JLabel("ENEMY");
-		
-		diceRollInfo.add(yourNumber);
-		diceRollInfo.add(otherPlayerNumber);
-		diceRollInfo.add(showPlayer1);
-		diceRollInfo.add(showPlayer2);
-		diceRollInfo.setVisible(false);
 
-		c.gridx = 0;
-		c.gridy = 2;
-		mainFrame.add(diceRollInfo, c);
-			
-		playButton = new JButton("PLAY");
-		playButton.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "You Win/Lose");
-			}
-		});
+		//Action listeners
 		
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -127,7 +106,6 @@ public class DGGui {
 					connectButton.setVisible(false);
 					playerNameInput.setEditable(false);
 					playerIPInput.setEditable(false);
-					diceRollInfo.setVisible(true);
 				}
 				catch (Exception e){	
 				}
@@ -136,7 +114,7 @@ public class DGGui {
 	}
 	
 	/**
-	 * To be removed, temporarily for testing
+	 * Main
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
