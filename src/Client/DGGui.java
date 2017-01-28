@@ -34,7 +34,7 @@ public class DGGui {
 	private void initialize() throws IOException {
 		mainFrame = new JFrame();
 		mainFrame.getContentPane().setBackground(new Color(102, 204, 204));
-		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Client\\kuva.png"));
+		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\Client\\dice.png"));
 		mainFrame.setResizable(false);
 		mainFrame.setTitle("DiceGame");
 		mainFrame.setSize(317, 231);

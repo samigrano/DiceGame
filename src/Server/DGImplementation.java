@@ -6,21 +6,23 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Random;
-
-import Client.Client;
 import Client.Player;
 
 public class DGImplementation extends UnicastRemoteObject implements DiceGame {
+	
 	Random rnd = new Random();
 	static ArrayList<Player> players = new ArrayList<>();
+	String winnerName;
+	
 	protected DGImplementation() throws RemoteException {
 	}
 
 	public static void main(String[] args) {
+		Registry reg = null;
+		
 		try {
-			Registry reg = LocateRegistry.createRegistry(1099);
+			reg = LocateRegistry.createRegistry(1099);
 			reg.rebind("dice", new DGImplementation());
-			
 			while (!isPlayersConnected()) {
 				Thread.sleep(2000);
 				System.out.println("Waiting for players...");
@@ -33,6 +35,7 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			System.out.println("Error: " + e);
 		}
 	}
+	
 
 	@Override
 	public void initPlayer(Player player) throws RemoteException {
@@ -60,6 +63,16 @@ public class DGImplementation extends UnicastRemoteObject implements DiceGame {
 			}
 		}
 		return winnerName;
+	}
+
+	@Override
+	public void sendMessage(String s) throws RemoteException {
+		System.out.println(s);	
+	}
+
+	@Override
+	public String getMessage() throws RemoteException {
+		return checkWinner();
 	}
 
 
