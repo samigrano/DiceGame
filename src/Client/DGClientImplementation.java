@@ -5,12 +5,21 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import Server.DiceGame;
-
+/**
+ * Luokka sis‰lt‰‰ asiakkaan RMI yhdist‰misen serveriin
+ * 
+ *
+ */
 public class DGClientImplementation extends UnicastRemoteObject{
 
 	protected DGClientImplementation() throws RemoteException {
 	}
-	
+	/**
+	 * 
+	 * @param name
+	 * @param ip
+	 * @param number
+	 */
 	public static void init(String name, String ip, int number) {
 		String queryName = name;
 		int ownNumber = number;
@@ -34,11 +43,17 @@ public class DGClientImplementation extends UnicastRemoteObject{
 			System.out.println("Error: " + e);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param number
+	 */
 	public static void setEnemyNumber(int number) {
 		DGGui.appendEnemyNumber(number);
 	}
-	
+	/**
+	 * 
+	 * @param number
+	 */
 	public static void setYourNumber(int number) {
 		DGGui.appenOwnNumber(number);
 	}

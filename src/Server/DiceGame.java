@@ -1,5 +1,7 @@
 package Server;
-
+/**
+ * Pelin rajapinta serverin ja asiakkaan väliseen kommunikointiin.
+ */
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

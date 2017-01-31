@@ -13,7 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+/**
+ * Graaffinen käyttöliittymä asiakkaalle, sisältää myös main metodin asiakkaan puolelta.
+ * 
+ *
+ */
 public class DGGui {
 
 	private JFrame mainFrame;
@@ -27,10 +31,17 @@ public class DGGui {
 	private int number;
 	private Random rnd = new Random();
 
+	/**
+	 * Konstruktori
+	 * @throws IOException
+	 */
 	public DGGui() throws IOException {
 		initialize();
 	}
-
+	/**
+	 * Metodissa alustetaan graaffinen käyttölittymä asiakkaalle
+	 * @throws IOException
+	 */
 	private void initialize() throws IOException {
 		mainFrame = new JFrame();
 		mainFrame.getContentPane().setBackground(new Color(102, 204, 204));
@@ -42,13 +53,13 @@ public class DGGui {
 		mainFrame.getContentPane().setLayout(null);
 
 		
-		//Buttons
+		//Luodaan Connect-nappi jota hyödynnetään serveriin yhdistämiseen
 		
 		connectButton = new JButton("Connect");
 		connectButton.setBounds(36, 152, 203, 23);
 		mainFrame.getContentPane().add(connectButton);
 		
-		//Labels
+		//Luodaan käyttöliittymän labelit, joilla esitetään käyttäjälle tekstiä tai kuvia.
 		
 		JLabel ipLabel = new JLabel("IP:");
 		ipLabel.setBounds(65, 59, 23, 14);
@@ -71,7 +82,8 @@ public class DGGui {
 		lblNewLabel.setBounds(169, 11, 133, 141);
 		mainFrame.getContentPane().add(lblNewLabel);
 		
-		//Text Fields
+		//Luodaan tekstikentät joihin asiakas kirjoittaa vastauksensa, sekä
+		//joilla näytetään serverin lähettämät luvut käyttäjälle
 		
 		playerIPInput = new JTextField();
 		playerIPInput.setBounds(88, 56, 71, 20);
@@ -95,7 +107,14 @@ public class DGGui {
 		mainFrame.getContentPane().add(otherPlayerNumber);
 		otherPlayerNumber.setEditable(false);
 
-		//Action listeners
+		/**Luodaan napille Connect kuuntelija. Nappia painaessa 
+		*  tallennetaan käyttäjän nimi, antama IP(vakiona localhost) ja alustetaan 
+		*  käyttäjälle numero peliä varten.
+		*  Nämä parametrit lähetetään clientImplementation luokalle.
+		*  @param name
+		*  @param ip
+		*  @param number
+		*/
 		
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -114,17 +133,24 @@ public class DGGui {
 			}
 		});		
 	}
+	/**
+	 * Asetetaan toisen käyttäjän pelinumero käyttöliittymään
+	 * @param number
+	 */
 	
 	public static void appendEnemyNumber(int number) {
 		otherPlayerNumber.setText(""+number);
 	}
-	
+	/**
+	 * Asetetaan oma pelinumero käyttölittymään
+	 * @param number
+	 */
 	public static void appenOwnNumber(int number) {
 		yourNumber.setText(""+number);
 	}
 	
 	/**
-	 * Main
+	 * Asiakkaan main-metodi
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
